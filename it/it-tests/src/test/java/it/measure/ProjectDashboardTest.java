@@ -61,7 +61,7 @@ public class ProjectDashboardTest {
   public void display_size() {
     executeBuild("shared/xoo-sample", "sample", "Sample");
 
-    ProjectDashboardPage page = new Navigation(orchestrator).openProjectDashboard("sample");
+    ProjectDashboardPage page = Navigation.create(orchestrator).openProjectDashboard("sample");
 
     page.getLinesOfCode().should(hasText("13"));
     page.getLanguageDistribution().should(hasText("Xoo"), hasText("13"));
@@ -78,7 +78,7 @@ public class ProjectDashboardTest {
         .setParam("tags", "foo,bar,baz")
     );
 
-    ProjectDashboardPage page = new Navigation(orchestrator).openProjectDashboard("sample");
+    ProjectDashboardPage page = Navigation.create(orchestrator).openProjectDashboard("sample");
     page
       .shouldHaveTags("foo", "bar", "baz")
       .shouldNotBeEditable();
@@ -95,7 +95,7 @@ public class ProjectDashboardTest {
     );
 
     executeBuild("shared/xoo-sample", "sample", "Sample");
-    ProjectDashboardPage page = new Navigation(orchestrator).logIn().asAdmin().openProjectDashboard("sample");
+    ProjectDashboardPage page = Navigation.create(orchestrator).logIn().asAdmin().openProjectDashboard("sample");
     page
       .shouldHaveTags("No tags")
       .shouldBeEditable()
@@ -116,7 +116,7 @@ public class ProjectDashboardTest {
   @Test
   @Ignore("there is no more place to show the error")
   public void display_a_nice_error_when_requesting_unknown_project() {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     nav.open("/dashboard/index?id=unknown");
     nav.getErrorMessage().should(text("The requested project does not exist. Either it has never been analyzed successfully or it has been deleted."));
     // TODO verify that on global homepage

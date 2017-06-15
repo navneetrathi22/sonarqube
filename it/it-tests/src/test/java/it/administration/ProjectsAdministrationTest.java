@@ -43,7 +43,7 @@ public class ProjectsAdministrationTest {
   @ClassRule
   public static Orchestrator orchestrator = Category1Suite.ORCHESTRATOR;
 
-  private Navigation nav = new Navigation(orchestrator);
+  private Navigation nav = Navigation.create(orchestrator);
 
   @Before
   public void deleteAnalysisData() throws SQLException {

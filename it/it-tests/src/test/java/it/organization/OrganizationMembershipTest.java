@@ -70,14 +70,14 @@ public class OrganizationMembershipTest {
 
   @Test
   public void new_user_should_not_become_member_of_default_organization() {
-    User user = users.createUser();
+    User user = users.generate();
     organizations.assertThatNotMemberOf(null, user);
   }
 
   @Test
   public void add_and_remove_member() {
     Organization organization = organizations.create();
-    User user = users.createUser();
+    User user = users.generate();
 
     addMembership(organization, user);
     organizations.assertThatMemberOf(organization, user);
@@ -89,7 +89,7 @@ public class OrganizationMembershipTest {
   @Test
   public void remove_organization_admin_member() {
     Organization organization = organizations.create();
-    User user = users.createUser();
+    User user = users.generate();
     addMembership(organization, user);
 
     rootWsClient.permissions().addUser(new AddUserWsRequest().setLogin(user.getLogin()).setPermission("admin").setOrganization(organization.getKey()));
@@ -102,7 +102,7 @@ public class OrganizationMembershipTest {
   @Test
   public void fail_to_remove_organization_admin_member_when_last_admin() {
     Organization organization = organizations.create();
-    User user = users.createUser();
+    User user = users.generate();
     addMembership(organization, user);
 
     rootWsClient.permissions().addUser(new AddUserWsRequest().setLogin(user.getLogin()).setPermission("admin").setOrganization(organization.getKey()));
@@ -118,7 +118,7 @@ public class OrganizationMembershipTest {
   @Test
   public void remove_user_remove_its_membership() {
     Organization organization = organizations.create();
-    User user = users.createUser();
+    User user = users.generate();
     addMembership(organization, user);
 
     users.deactivateUsers(user.getLogin());
@@ -128,7 +128,7 @@ public class OrganizationMembershipTest {
   @Test
   public void user_creating_an_organization_becomes_member_of_this_organization() {
     String password = "aPassword";
-    User user = users.createUser(p -> p.setPassword(password));
+    User user = users.generate(p -> p.setPassword(password));
 
     Organization organization = organizations.as(user.getLogin(), password).create();
 

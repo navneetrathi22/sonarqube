@@ -58,7 +58,7 @@ public class LicensesPageTest {
 
   @Test
   public void display_licenses() {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     LicensesPage page = nav.logIn().asAdmin().openLicenses();
 
     page.getLicenses().shouldHaveSize(2);
@@ -70,7 +70,7 @@ public class LicensesPageTest {
   public void change_licenses() {
     String EXAMPLE_LICENSE = "TmFtZTogRGV2ZWxvcHBlcnMKUGx1Z2luOiBhdXRvY29udHJvbApFeHBpcmVzOiAyMDEyLTA0LTAxCktleTogNjI5N2MxMzEwYzg2NDZiZTE5MDU1MWE4ZmZmYzk1OTBmYzEyYTIyMgo=";
 
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     LicensesPage page = nav.logIn().asAdmin().openLicenses();
     LicenseItem licenseItem = page.getLicenseByKey("typed.license.secured");
     licenseItem.setLicense(EXAMPLE_LICENSE);

@@ -113,7 +113,7 @@ public class OAuth2IdentityProviderTest {
     simulateRedirectionToCallback();
     enablePlugin();
 
-    Navigation nav = new Navigation(ORCHESTRATOR);
+    Navigation nav = Navigation.create(ORCHESTRATOR);
     nav.openLogin().useOAuth2().shouldBeLoggedIn();
 
     userRule.verifyUserExists(USER_LOGIN, USER_NAME, USER_EMAIL);

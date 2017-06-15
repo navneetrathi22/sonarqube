@@ -47,7 +47,7 @@ public class PropertySetsTest {
   @ClassRule
   public static Orchestrator orchestrator = Category1Suite.ORCHESTRATOR;
 
-  private Navigation nav = new Navigation(orchestrator);
+  private Navigation nav = Navigation.create(orchestrator);
 
   static SettingsService SETTINGS;
 

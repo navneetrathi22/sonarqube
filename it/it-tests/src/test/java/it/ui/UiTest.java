@@ -44,7 +44,7 @@ public class UiTest {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Category4Suite.ORCHESTRATOR;
 
-  private Navigation nav = new Navigation(ORCHESTRATOR);
+  private Navigation nav = Navigation.create(ORCHESTRATOR);
 
   @Test
   public void footer_contains_information() {

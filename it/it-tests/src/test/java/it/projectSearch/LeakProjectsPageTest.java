@@ -53,7 +53,7 @@ public class LeakProjectsPageTest {
   @Rule
   public OrganizationRule organizationRule = new OrganizationRule(orchestrator);
 
-  private Navigation nav = new Navigation(orchestrator);
+  private Navigation nav = Navigation.create(orchestrator);
   private Organization organization;
 
   @BeforeClass

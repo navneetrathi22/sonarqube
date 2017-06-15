@@ -37,7 +37,7 @@ public class ProjectActivityPageTest {
   @ClassRule
   public static Orchestrator ORCHESTRATOR = Category4Suite.ORCHESTRATOR;
 
-  private Navigation nav = new Navigation(ORCHESTRATOR);
+  private Navigation nav = Navigation.create(ORCHESTRATOR);
 
   @Before
   public void setUp() throws Exception {

@@ -47,7 +47,7 @@ public class ProjectLinksPageTest {
   @ClassRule
   public static Orchestrator ORCHESTRATOR = Category1Suite.ORCHESTRATOR;
 
-  private Navigation nav = new Navigation(ORCHESTRATOR);
+  private Navigation nav = Navigation.create(ORCHESTRATOR);
 
   private static WsClient wsClient;
   private long customLinkId;

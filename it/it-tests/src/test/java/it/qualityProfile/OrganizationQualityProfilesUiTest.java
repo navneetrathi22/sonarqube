@@ -76,7 +76,7 @@ public class OrganizationQualityProfilesUiTest {
 
   @Test
   public void testNoGlobalPage() {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     nav.open("/profiles");
     $(".page-wrapper-simple").should(Condition.visible);
   }
@@ -100,7 +100,7 @@ public class OrganizationQualityProfilesUiTest {
 
   @Test
   public void testNotFound() {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     nav.open("/organizations/" + organization.getKey() + "/quality_profiles/show?key=unknown");
     $(".quality-profile-not-found").should(Condition.visible);
 

@@ -28,25 +28,34 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.annotation.Nullable;
 import org.openqa.selenium.By;
+import org.sonarqube.test.Tester;
 import pageobjects.issues.IssuesPage;
 import pageobjects.licenses.LicensesPage;
 import pageobjects.organization.MembersPage;
 import pageobjects.projects.ProjectsPage;
 import pageobjects.settings.SettingsPage;
 
-import static com.codeborne.selenide.Condition.hasText;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.page;
 
 public class Navigation {
 
-  public Navigation(Orchestrator orchestrator) {
-    SelenideConfig.configure(orchestrator);
-    WebDriverRunner.getWebDriver().manage().deleteAllCookies();
-    //openHomepage();
+  public Navigation() {
+    $("#content").shouldBe(Condition.exist);
   }
 
-  public Navigation openHomepage() {
+  /**
+   * @deprecated use {@link Tester#openBrowser()}
+   */
+  @Deprecated
+  public static Navigation create(Orchestrator orchestrator) {
+    SelenideConfig.configure(orchestrator);
+    WebDriverRunner.getWebDriver().manage().deleteAllCookies();
+    return Selenide.open("/", Navigation.class);
+  }
+
+  public Navigation openHome() {
     return open("/", Navigation.class);
   }
 
@@ -147,12 +156,14 @@ public class Navigation {
     return Selenide.open(relativeUrl, pageObjectClassClass);
   }
 
-  public void shouldBeLoggedIn() {
+  public Navigation shouldBeLoggedIn() {
     loggedInDropdown().should(Condition.visible);
+    return this;
   }
 
-  public void shouldNotBeLoggedIn() {
+  public Navigation shouldNotBeLoggedIn() {
     logInLink().should(Condition.visible);
+    return this;
   }
 
   public LoginPage logIn() {
@@ -198,8 +209,9 @@ public class Navigation {
     return $(".js-user-authenticated");
   }
 
-  public void shouldBeRedirectToLogin() {
-    $("#content").should(hasText("Log In to SonarQube"));
+  public Navigation shouldBeRedirectedToLogin() {
+    $("#login_form").should(visible);
+    return this;
   }
 
 }

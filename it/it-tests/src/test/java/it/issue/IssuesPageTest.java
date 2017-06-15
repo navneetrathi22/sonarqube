@@ -54,7 +54,7 @@ public class IssuesPageTest {
 
   @Test
   public void should_display_actions() {
-    Navigation nav = new Navigation(ORCHESTRATOR);
+    Navigation nav = Navigation.create(ORCHESTRATOR);
     IssuesPage page = nav.logIn().asAdmin().openIssues();
     Issue issue = page.getFirstIssue();
     issue.shouldAllowAssign().shouldAllowChangeType();
@@ -62,7 +62,7 @@ public class IssuesPageTest {
 
   @Test
   public void should_not_display_actions() {
-    Navigation nav = new Navigation(ORCHESTRATOR);
+    Navigation nav = Navigation.create(ORCHESTRATOR);
     IssuesPage page = nav.openIssues();
     Issue issue = page.getFirstIssue();
     issue.shouldNotAllowAssign().shouldNotAllowChangeType();

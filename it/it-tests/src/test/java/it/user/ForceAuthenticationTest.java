@@ -107,10 +107,10 @@ public class ForceAuthenticationTest {
 
   @Test
   public void redirect_to_login_page() {
-    Navigation page = new Navigation(orchestrator).openHomepage();
-    page.shouldBeRedirectToLogin();
+    Navigation page = Navigation.create(orchestrator).openHome();
+    page.shouldBeRedirectedToLogin();
     page.openLogin().submitCredentials("admin", "admin").shouldBeLoggedIn();
-    page.logOut().shouldBeRedirectToLogin();
+    page.logOut().shouldBeRedirectedToLogin();
   }
 
   private void verifyPathRequiresAuthentication(String path, WsRequest.Method method) {

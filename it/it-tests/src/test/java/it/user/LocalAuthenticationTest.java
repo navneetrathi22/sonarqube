@@ -93,7 +93,7 @@ public class LocalAuthenticationTest {
 
   @Test
   public void log_in_with_correct_credentials_then_log_out() {
-    Navigation nav = new Navigation(ORCHESTRATOR);
+    Navigation nav = Navigation.create(ORCHESTRATOR);
     nav.shouldNotBeLoggedIn();
     nav.logIn().submitCredentials(LOGIN, "123456").shouldBeLoggedIn();
     nav.logOut().shouldNotBeLoggedIn();
@@ -101,13 +101,13 @@ public class LocalAuthenticationTest {
 
   @Test
   public void log_in_with_wrong_credentials() {
-    Navigation nav = new Navigation(ORCHESTRATOR);
+    Navigation nav = Navigation.create(ORCHESTRATOR);
     LoginPage page = nav
       .logIn()
       .submitWrongCredentials(LOGIN, "wrong");
     page.getErrorMessage().shouldHave(Condition.text("Authentication failed"));
 
-    nav.openHomepage();
+    nav.openHome();
     nav.shouldNotBeLoggedIn();
   }
 

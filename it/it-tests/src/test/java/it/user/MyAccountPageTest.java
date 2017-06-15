@@ -61,7 +61,7 @@ public class MyAccountPageTest {
 
   @Test
   public void should_display_user_details() throws Exception {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     nav.openLogin().submitCredentials("account-user", "password").shouldBeLoggedIn();
     nav.open("/account");
     $("#name").shouldHave(text("User With Account"));
@@ -74,7 +74,7 @@ public class MyAccountPageTest {
 
   @Test
   public void should_change_password() throws Exception {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     nav.openLogin().submitCredentials("account-user", "password").shouldBeLoggedIn();
     nav.open("/account/security");
     $("#old_password").val("password");
@@ -99,7 +99,7 @@ public class MyAccountPageTest {
 
   @Test
   public void notifications() {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     nav.logIn().asAdmin().openNotifications()
       .addGlobalNotification("ChangesOnMyIssue")
       .addGlobalNotification("NewIssues")

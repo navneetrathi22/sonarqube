@@ -55,7 +55,7 @@ public class ProjectKeyPageTest {
     ORCHESTRATOR.resetData();
   }
 
-  private Navigation nav = new Navigation(ORCHESTRATOR);
+  private Navigation nav = Navigation.create(ORCHESTRATOR);
 
   @Test
   public void change_key_when_no_modules() {

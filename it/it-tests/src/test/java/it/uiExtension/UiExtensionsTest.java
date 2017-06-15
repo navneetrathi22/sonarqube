@@ -53,7 +53,7 @@ public class UiExtensionsTest {
 
   @Test
   public void global_page() {
-    new Navigation(orchestrator).open("/about");
+    Navigation.create(orchestrator).open("/about");
 
     // on about page
     $("#global-navigation-more").click();
@@ -65,7 +65,7 @@ public class UiExtensionsTest {
 
   @Test
   public void global_admin_page() {
-    new Navigation(orchestrator)
+    Navigation.create(orchestrator)
       .logIn().asAdmin()
       .open("/about");
 
@@ -79,7 +79,7 @@ public class UiExtensionsTest {
 
   @Test
   public void project_page() {
-    new Navigation(orchestrator).open("/dashboard?id=sample");
+    Navigation.create(orchestrator).open("/dashboard?id=sample");
 
     $("#component-navigation-more").click();
     $(By.linkText("Project Page")).click();
@@ -90,7 +90,7 @@ public class UiExtensionsTest {
 
   @Test
   public void project_admin_page() {
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     nav.logIn().asAdmin().open("/dashboard?id=sample");
 
     $("#component-navigation-admin").click();

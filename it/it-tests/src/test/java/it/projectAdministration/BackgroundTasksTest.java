@@ -52,7 +52,7 @@ public class BackgroundTasksTest {
 
   @Test
   public void display_scanner_context() {
-    Navigation nav = new Navigation(ORCHESTRATOR);
+    Navigation nav = Navigation.create(ORCHESTRATOR);
     nav.logIn().submitCredentials("admin", "admin");
     BackgroundTasksPage page = nav.openBackgroundTasksPage();
 
@@ -66,7 +66,7 @@ public class BackgroundTasksTest {
 
   @Test
   public void display_error_stacktrace() {
-    Navigation nav = new Navigation(ORCHESTRATOR);
+    Navigation nav = Navigation.create(ORCHESTRATOR);
     executeBuild("test-project", "Test Project", "2010-01-01");
 
     nav.logIn().submitCredentials("admin", "admin");

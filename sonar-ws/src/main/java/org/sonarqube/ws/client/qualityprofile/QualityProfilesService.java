@@ -147,9 +147,9 @@ public class QualityProfilesService extends BaseService {
     call(postRequest);
   }
 
-  public void delete(DeleteRequest request) {
+  public void delete(String profileKey) {
     PostRequest postRequest = new PostRequest(path(ACTION_DELETE))
-      .setParam(PARAM_PROFILE_KEY, request.getProfileKey());
+      .setParam(PARAM_PROFILE_KEY, profileKey);
 
     call(postRequest);
   }

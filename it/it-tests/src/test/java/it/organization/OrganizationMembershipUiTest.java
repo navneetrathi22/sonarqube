@@ -66,13 +66,13 @@ public class OrganizationMembershipUiTest {
   @Test
   public void should_display_members_page() {
     Organization organization = organizations.create();
-    User member1 = users.createUser(p -> p.setName("foo"));
+    User member1 = users.generate(p -> p.setName("foo"));
     addMembership(organization, member1);
-    User member2 = users.createUser(p -> p.setName("bar"));
+    User member2 = users.generate(p -> p.setName("bar"));
     addMembership(organization, member2);
-    User nonMember = users.createUser();
+    User nonMember = users.generate();
 
-    MembersPage page = new Navigation(orchestrator).openOrganizationMembers(organization.getKey());
+    MembersPage page = Navigation.create(orchestrator).openOrganizationMembers(organization.getKey());
     page
       .canNotAddMember()
       .shouldHaveTotal(3);
@@ -87,14 +87,14 @@ public class OrganizationMembershipUiTest {
   @Test
   public void search_for_members() {
     Organization organization = organizations.create();
-    User member1 = users.createUser(p -> p.setName("foo"));
+    User member1 = users.generate(p -> p.setName("foo"));
     addMembership(organization, member1);
-    User member2 = users.createUser(p -> p.setName("barGuy"));
+    User member2 = users.generate(p -> p.setName("barGuy"));
     addMembership(organization, member2);
     // Created to verify that only the user part of the org is returned
-    User userWithSameNamePrefix = users.createUser(p -> p.setName(member2.getName() + "barOtherGuy"));
+    User userWithSameNamePrefix = users.generate(p -> p.setName(member2.getName() + "barOtherGuy"));
 
-    MembersPage page = new Navigation(orchestrator).openOrganizationMembers(organization.getKey());
+    MembersPage page = Navigation.create(orchestrator).openOrganizationMembers(organization.getKey());
     page
       .searchForMember("bar")
       .shouldHaveTotal(1);
@@ -110,9 +110,9 @@ public class OrganizationMembershipUiTest {
   @Test
   public void admin_can_add_members() {
     Organization organization = organizations.create();
-    User user = users.createUser();
+    User user = users.generate();
 
-    MembersPage page = new Navigation(orchestrator).logIn().asAdmin().openOrganizationMembers(organization.getKey());
+    MembersPage page = Navigation.create(orchestrator).logIn().asAdmin().openOrganizationMembers(organization.getKey());
     page
       .shouldHaveTotal(1)
       .addMember(user.getLogin())
@@ -128,12 +128,12 @@ public class OrganizationMembershipUiTest {
   @Test
   public void admin_can_remove_members() {
     Organization organization = organizations.create();
-    User user1 = users.createUser();
+    User user1 = users.generate();
     addMembership(organization, user1);
-    User user2 = users.createUser();
+    User user2 = users.generate();
     addMembership(organization, user2);
 
-    MembersPage page = new Navigation(orchestrator).logIn().asAdmin().openOrganizationMembers(organization.getKey());
+    MembersPage page = Navigation.create(orchestrator).logIn().asAdmin().openOrganizationMembers(organization.getKey());
     page.shouldHaveTotal(3)
       .getMembersByIdx(1).removeMembership();
     page.shouldHaveTotal(2);
@@ -142,10 +142,10 @@ public class OrganizationMembershipUiTest {
   @Test
   public void admin_can_manage_groups() {
     Organization organization = organizations.create();
-    User user = users.createUser();
+    User user = users.generate();
     addMembership(organization, user);
 
-    MembersPage page = new Navigation(orchestrator).logIn().asAdmin().openOrganizationMembers(organization.getKey());
+    MembersPage page = Navigation.create(orchestrator).logIn().asAdmin().openOrganizationMembers(organization.getKey());
     // foo user
     page.getMembersByIdx(1)
       .manageGroupsOpen()
@@ -163,9 +163,9 @@ public class OrganizationMembershipUiTest {
   @Test
   public void groups_count_should_be_updated_when_a_member_was_just_added() {
     Organization organization = organizations.create();
-    User user = users.createUser();
+    User user = users.generate();
 
-    MembersPage page = new Navigation(orchestrator)
+    MembersPage page = Navigation.create(orchestrator)
       .logIn().asAdmin()
       .openOrganizationMembers(organization.getKey());
     page

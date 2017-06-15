@@ -48,7 +48,7 @@ public class OrganizationUiExtensionsTest {
   @Test
   public void organization_page() {
     Organization organization = organizations.create();
-    new Navigation(orchestrator).open("/organizations/" + organization.getKey() + "/projects");
+    Navigation.create(orchestrator).open("/organizations/" + organization.getKey() + "/projects");
 
     $("#organization-navigation-more").click();
     $(By.linkText("Organization Page")).shouldBe(Condition.visible).click();
@@ -60,7 +60,7 @@ public class OrganizationUiExtensionsTest {
   @Test
   public void organization_admin_page() {
     Organization organization = organizations.create();
-    new Navigation(orchestrator).logIn().asAdmin().open("/organizations/" + organization.getKey() + "/projects");
+    Navigation.create(orchestrator).logIn().asAdmin().open("/organizations/" + organization.getKey() + "/projects");
 
     $("#context-navigation a.navbar-admin-link").click();
     $(By.linkText("Organization Admin Page")).shouldBe(Condition.visible).click();

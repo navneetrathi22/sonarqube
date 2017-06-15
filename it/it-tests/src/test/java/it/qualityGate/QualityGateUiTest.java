@@ -87,7 +87,7 @@ public class QualityGateUiTest {
     qgClient.updateCondition(UpdateCondition.create(lowThresholds.id()).metricKey("lines").operator("GT").warningThreshold("5000").errorThreshold("5000"));
     scanSampleWithDate(secondAnalysisDate);
 
-    Navigation nav = new Navigation(orchestrator);
+    Navigation nav = Navigation.create(orchestrator);
     ProjectActivityPage page = nav.openProjectActivity("sample");
     page
       .assertFirstAnalysisOfTheDayHasText(secondAnalysisDate, "Green (was Orange)")

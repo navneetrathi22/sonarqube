@@ -63,7 +63,7 @@ public class PersonalOrganizationTest {
 
   @Test
   public void personal_organizations_are_created_for_new_users() {
-    WsUsers.CreateWsResponse.User user = users.createUser();
+    WsUsers.CreateWsResponse.User user = users.generate();
 
     List<Organizations.Organization> existing = organizations.getWsService().search(SearchWsRequest.builder().build()).getOrganizationsList();
     assertThat(existing)

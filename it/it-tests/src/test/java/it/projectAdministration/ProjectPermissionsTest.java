@@ -36,7 +36,7 @@ public class ProjectPermissionsTest {
   @ClassRule
   public static Orchestrator orchestrator = Category1Suite.ORCHESTRATOR;
 
-  private Navigation nav = new Navigation(orchestrator);
+  private Navigation nav = Navigation.create(orchestrator);
 
   @BeforeClass
   public static void beforeClass() {

@@ -215,7 +215,7 @@ public class BillingTest {
     String projectKey = createPublicProject(createOrganization());
     setServerProperty(orchestrator, "sonar.billing.preventUpdatingProjectsVisibilityToPrivate", "true");
 
-    new Navigation(orchestrator)
+    Navigation.create(orchestrator)
       .logIn().asAdmin()
       .openProjectPermissions(projectKey)
       .shouldBePublic()
@@ -227,7 +227,7 @@ public class BillingTest {
     String projectKey = createPublicProject(createOrganization());
     setServerProperty(orchestrator, "sonar.billing.preventUpdatingProjectsVisibilityToPrivate", "false");
 
-    new Navigation(orchestrator)
+    Navigation.create(orchestrator)
       .logIn().asAdmin()
       .openProjectPermissions(projectKey)
       .shouldBePublic()

@@ -36,7 +36,7 @@ public class SourceViewerTest {
   @ClassRule
   public static final Orchestrator ORCHESTRATOR = Category4Suite.ORCHESTRATOR;
 
-  private Navigation nav = new Navigation(ORCHESTRATOR);
+  private Navigation nav = Navigation.create(ORCHESTRATOR);
 
   @BeforeClass
   public static void beforeClass() {
